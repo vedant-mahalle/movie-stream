@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magnet Stream - Movie Streaming</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-film"></i> Magnet Stream</h1>
+                <p>Stream movies directly from magnet links</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Magnet Link Input Section -->
+            <section class="magnet-input-section">
+                <div class="input-container">
+                    <h2><i class="fas fa-link"></i> Add Magnet Link</h2>
+                    <div class="magnet-form">
+                        <div class="input-group">
+                            <input type="text" id="magnetInput" placeholder="Paste your magnet link here..." />
+                            <button id="streamBtn" class="btn btn-primary">
+                                <i class="fas fa-play"></i> Start Streaming
+                            </button>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" id="filenameInput" placeholder="Optional: Specific filename to stream" />
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Video Player Section -->
+            <section class="video-section" id="videoSection" style="display: none;">
+                <div class="video-container">
+                    <video id="videoPlayer" controls>
+                        <source src="" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-info">
+                        <h3 id="videoTitle">Loading...</h3>
+                        <div class="video-stats">
+                            <span id="videoProgress">0%</span>
+                            <span id="downloadSpeed">0 MB/s</span>
+                            <span id="peerCount">0 peers</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stream Status Section -->
+            <section class="status-section" id="statusSection" style="display: none;">
+                <div class="status-container">
+                    <h3><i class="fas fa-info-circle"></i> Stream Status</h3>
+                    <div class="status-grid">
+                        <div class="status-item">
+                            <span class="label">Status:</span>
+                            <span id="streamStatus" class="value">Initializing...</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="label">Progress:</span>
+                            <span id="overallProgress" class="value">0%</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="label">Download Speed:</span>
+                            <span id="overallSpeed" class="value">0 MB/s</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="label">Peers:</span>
+                            <span id="overallPeers" class="value">0</span>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div id="progressFill" class="progress-fill"></div>
+                    </div>
+                    
+                    <!-- Debug Information -->
+                    <div class="debug-info" style="margin-top: 20px; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                        <h4 style="color: #4ecdc4; margin-bottom: 10px;"><i class="fas fa-bug"></i> Debug Info</h4>
+                        <div id="debugInfo" style="font-size: 0.9rem; line-height: 1.4;">
+                            <div>Stream ID: <span id="debugStreamId">-</span></div>
+                            <div>Current Video: <span id="debugCurrentVideo">-</span></div>
+                            <div>Last Update: <span id="debugLastUpdate">-</span></div>
+                            <div>Video Files Found: <span id="debugVideoFiles">-</span></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Files List Section -->
+            <section class="files-section" id="filesSection" style="display: none;">
+                <div class="files-container">
+                    <h3><i class="fas fa-folder"></i> Available Files</h3>
+                    <div id="filesList" class="files-list">
+                        <!-- Files will be populated here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Active Streams Section -->
+            <section class="streams-section">
+                <div class="streams-container">
+                    <h3><i class="fas fa-list"></i> Active Streams</h3>
+                    <div id="activeStreams" class="streams-list">
+                        <!-- Active streams will be populated here -->
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Loading Overlay -->
+        <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+            <div class="loading-content">
+                <div class="spinner"></div>
+                <p id="loadingText">Initializing stream...</p>
+            </div>
+        </div>
+
+        <!-- Error Modal -->
+        <div id="errorModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Error</h3>
+                    <button class="close-btn" onclick="closeErrorModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p id="errorMessage"></p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" onclick="closeErrorModal()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
